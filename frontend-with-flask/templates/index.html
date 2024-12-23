@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CVE List</title>
+    <style>
+        h1 {
+  color:#000;
+  font-family:sans-serif;
+  font-size:2em;
+  margin-bottom:0;
+}
+
+table {  
+  font-family:sans-serif;
+  th, td {
+    padding:.25em .5em;
+    text-align:left;
+    &:nth-child(2) {
+      text-align:right;
+    }
+  }
+  td {
+    background-color:#eee;    
+  }
+  th {
+    background-color:#009;
+    color:#fff;
+  }
+}
+
+.tab {
+  border-collapse:separate;
+  border-spacing:.25em 1em;
+}
+    </style>
+    
+</head>
+<body>
+    <h1>CVE List</h1>
+
+    <table class="tab">
+      <thead>
+        <tr>
+          <th class="header">CVE ID</th>
+          <th class="header">Identifier</th>
+          <th class="header">Published Date</th>
+          <th class="header">Last Modified Date</th>
+          <th class="header">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in cves %}
+        <tr>
+          <td><a href="/{{item["ID"]}}">{{item["ID"]}}</a></td>
+          <td>{{item["Identifier"]}}</td>
+          <td>{{item["Last Modified"]}}</td>
+          <td>{{item["Published Date"]}}</td>
+          <td>{{item["Staus"]}}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+</body>
+</html>

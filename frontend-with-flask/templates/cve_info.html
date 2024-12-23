@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <title>CVE Info</title>
+        <style>
+        h1 {
+  color:#000;
+  font-family:sans-serif;
+  font-size:2em;
+  margin-bottom:0;
+}
+
+table {  
+  font-family:sans-serif;
+  th, td {
+    padding:.25em .5em;
+    text-align:left;
+    &:nth-child(2) {
+      text-align:right;
+    }
+  }
+  td {
+    background-color:#eee;    
+  }
+  th {
+    background-color:#009;
+    color:#fff;
+  }
+}
+
+.tab {
+  border-collapse:separate;
+  border-spacing:.25em 1em;
+}
+    </style>
+
+</head>
+
+<body>
+    <h1>{{ data[0]["ID"] }}</h1>
+    <h4>Description :</h4>
+    <p>{{ data[0]["Description"]}}</p>
+
+    <h3>CVSS V2 metrics : </h3>
+    <div><b>Severity :</b> {{ data[0]["cvssMetricV2"][0]["baseSeverity"] }} </div>
+    <div><b>Score :</b> {{ data[0]["cvssMetricV2"][0]["exploitabilityScore"] }} </div>
+    <div><b>Vector String :</b> {{ data[0]["cvssMetricV2"][0]["cvssData"]["vectorString"] }} </div>
+
+    <table class="tab">
+        <thead>
+          <tr>
+            <th class="header">Access Vector</th>
+            <th class="header">Access Complexity</th>
+            <th class="header">Authentication</th>
+            <th class="header">Confidentiality Imapct</th>
+            <th class="header">Integrity Impact</th>
+            <th class="header">Availability Impact</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td> {{ data[0]["cvssMetricV2"][0]["cvssData"]["accessVector"]}}</td>
+            <td> {{ data[0]["cvssMetricV2"][0]["cvssData"]["accessComplexity"]}}</td>
+            <td> {{ data[0]["cvssMetricV2"][0]["cvssData"]["authentication"]}}</td>
+            <td> {{ data[0]["cvssMetricV2"][0]["cvssData"]["confidentialityImpact"]}}</td>
+            <td> {{ data[0]["cvssMetricV2"][0]["cvssData"]["integrityImpact"]}}</td>
+            <td> {{ data[0]["cvssMetricV2"][0]["cvssData"]["availabilityImpact"]}}</td>
+          </tr>
+        </tbody>
+      </table>
+
+
+      <h3>Score : </h3>
+      <div><b>Exploitability Score: </b> {{ data[0]["cvssMetricV2"][0]["exploitabilityScore"] }}  </div>
+      <div><b>Impact Score: </b> {{ data[0]["cvssMetricV2"][0]["impactScore"] }} </div>
+
+      <h3>CPE:</h3>
+      <table class="tab">
+        <thead>
+          <tr>
+            <th class="header">Criteria</th>
+            <th class="header">Match Criteria ID</th>
+            <th class="header">Vulnerable</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td> {{ data[0]["CPE Match"][0]["criteria"]}}</td>
+            <td> {{ data[0]["CPE Match"][0]["matchCriteriaId"]}}</td>
+            <td> {{ data[0]["CPE Match"][0]["vulnerable"]}}</td>
+            
+          </tr>
+        </tbody>
+      </table>
+
+
+</body>
+
+</html>
