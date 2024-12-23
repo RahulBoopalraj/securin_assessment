@@ -3,21 +3,31 @@ from pymongo import MongoClient
 
 app = Flask(__name__)
 
+MONGO_URI = "your_mongo_uri"
+DB_NAME = "your_database_name"
+COLLECTION_NAME = "your_collection_name"
 
-client = MongoClient("mongodb://localhost:27017/") 
-db = client["Rahul_Securin"]  
-collection = db["cve_with_metrics"] 
+# Database connection
+client = MongoClient(MONGO_URI)
+db = mongo_client[DB_NAME]
+collection = db[COLLECTION_NAME]
 
-@app.route('/', methods=('GET', 'POST'))
+@app.route('/', methods=['GET'])
 def index():
+    """
+    Route to display all CVEs.
+    """
     cves = collection.find()
-    print(cves[0]["ID"])
     return render_template('index.html', cves=cves)
 
-
-@app.route('/<cve>', methods=('GET', 'POST'))
+@app.route('/<cve>', methods=['GET'])
 def profile(cve):
-    query = {"ID": cve}  
+    """
+    Route to display details of a specific CVE.
+    """
+    query = {"ID": cve}
     data = list(collection.find(query))
-    print(data)
     return render_template('cve_info.html', cve=cve, data=data)
+
+if __name__ == '__main__':
+    app.run(debug=True)

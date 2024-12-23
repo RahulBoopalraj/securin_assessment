@@ -1,102 +1,136 @@
 <!DOCTYPE html>
-
-<html>
-
-<head>
-
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>CVE Info</title>
-        <style>
-        h1 {
-  color:#000;
-  font-family:sans-serif;
-  font-size:2em;
-  margin-bottom:0;
-}
+    <style>
+      body {
+        font-family: sans-serif;
+        line-height: 1.6;
+        margin: 20px;
+      }
 
-table {  
-  font-family:sans-serif;
-  th, td {
-    padding:.25em .5em;
-    text-align:left;
-    &:nth-child(2) {
-      text-align:right;
-    }
-  }
-  td {
-    background-color:#eee;    
-  }
-  th {
-    background-color:#009;
-    color:#fff;
-  }
-}
+      h1 {
+        color: #000;
+        font-size: 2em;
+        margin-bottom: 0;
+      }
 
-.tab {
-  border-collapse:separate;
-  border-spacing:.25em 1em;
-}
+      h4 {
+        margin-top: 20px;
+        font-weight: bold;
+      }
+
+      table {
+        border-collapse: collapse;
+        width: 100%;
+        margin-top: 20px;
+      }
+
+      th,
+      td {
+        padding: 0.5em;
+        text-align: left;
+      }
+
+      th {
+        background-color: #009;
+        color: #fff;
+      }
+
+      td {
+        background-color: #eee;
+      }
+
+      .tab {
+        border-spacing: 0.25em 1em;
+      }
+
+      div {
+        margin-bottom: 10px;
+      }
+
+      p {
+        margin: 10px 0;
+      }
     </style>
+  </head>
 
-</head>
-
-<body>
+  <body>
     <h1>{{ data[0]["ID"] }}</h1>
-    <h4>Description :</h4>
-    <p>{{ data[0]["Description"]}}</p>
+    <h4>Description:</h4>
+    <p>{{ data[0]["Description"] }}</p>
 
-    <h3>CVSS V2 metrics : </h3>
-    <div><b>Severity :</b> {{ data[0]["cvssMetricV2"][0]["baseSeverity"] }} </div>
-    <div><b>Score :</b> {{ data[0]["cvssMetricV2"][0]["exploitabilityScore"] }} </div>
-    <div><b>Vector String :</b> {{ data[0]["cvssMetricV2"][0]["cvssData"]["vectorString"] }} </div>
+    <h3>CVSS V2 Metrics:</h3>
+    <div><b>Severity:</b> {{ data[0]["cvssMetricV2"][0]["baseSeverity"] }}</div>
+    <div>
+      <b>Score:</b> {{ data[0]["cvssMetricV2"][0]["exploitabilityScore"] }}
+    </div>
+    <div>
+      <b>Vector String:</b> {{
+      data[0]["cvssMetricV2"][0]["cvssData"]["vectorString"] }}
+    </div>
 
     <table class="tab">
-        <thead>
-          <tr>
-            <th class="header">Access Vector</th>
-            <th class="header">Access Complexity</th>
-            <th class="header">Authentication</th>
-            <th class="header">Confidentiality Imapct</th>
-            <th class="header">Integrity Impact</th>
-            <th class="header">Availability Impact</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td> {{ data[0]["cvssMetricV2"][0]["cvssData"]["accessVector"]}}</td>
-            <td> {{ data[0]["cvssMetricV2"][0]["cvssData"]["accessComplexity"]}}</td>
-            <td> {{ data[0]["cvssMetricV2"][0]["cvssData"]["authentication"]}}</td>
-            <td> {{ data[0]["cvssMetricV2"][0]["cvssData"]["confidentialityImpact"]}}</td>
-            <td> {{ data[0]["cvssMetricV2"][0]["cvssData"]["integrityImpact"]}}</td>
-            <td> {{ data[0]["cvssMetricV2"][0]["cvssData"]["availabilityImpact"]}}</td>
-          </tr>
-        </tbody>
-      </table>
+      <thead>
+        <tr>
+          <th>Access Vector</th>
+          <th>Access Complexity</th>
+          <th>Authentication</th>
+          <th>Confidentiality Impact</th>
+          <th>Integrity Impact</th>
+          <th>Availability Impact</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{ data[0]["cvssMetricV2"][0]["cvssData"]["accessVector"] }}</td>
+          <td>
+            {{ data[0]["cvssMetricV2"][0]["cvssData"]["accessComplexity"] }}
+          </td>
+          <td>
+            {{ data[0]["cvssMetricV2"][0]["cvssData"]["authentication"] }}
+          </td>
+          <td>
+            {{ data[0]["cvssMetricV2"][0]["cvssData"]["confidentialityImpact"]
+            }}
+          </td>
+          <td>
+            {{ data[0]["cvssMetricV2"][0]["cvssData"]["integrityImpact"] }}
+          </td>
+          <td>
+            {{ data[0]["cvssMetricV2"][0]["cvssData"]["availabilityImpact"] }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
 
+    <h3>Score:</h3>
+    <div>
+      <b>Exploitability Score:</b> {{
+      data[0]["cvssMetricV2"][0]["exploitabilityScore"] }}
+    </div>
+    <div>
+      <b>Impact Score:</b> {{ data[0]["cvssMetricV2"][0]["impactScore"] }}
+    </div>
 
-      <h3>Score : </h3>
-      <div><b>Exploitability Score: </b> {{ data[0]["cvssMetricV2"][0]["exploitabilityScore"] }}  </div>
-      <div><b>Impact Score: </b> {{ data[0]["cvssMetricV2"][0]["impactScore"] }} </div>
-
-      <h3>CPE:</h3>
-      <table class="tab">
-        <thead>
-          <tr>
-            <th class="header">Criteria</th>
-            <th class="header">Match Criteria ID</th>
-            <th class="header">Vulnerable</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td> {{ data[0]["CPE Match"][0]["criteria"]}}</td>
-            <td> {{ data[0]["CPE Match"][0]["matchCriteriaId"]}}</td>
-            <td> {{ data[0]["CPE Match"][0]["vulnerable"]}}</td>
-            
-          </tr>
-        </tbody>
-      </table>
-
-
-</body>
-
+    <h3>CPE:</h3>
+    <table class="tab">
+      <thead>
+        <tr>
+          <th>Criteria</th>
+          <th>Match Criteria ID</th>
+          <th>Vulnerable</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{ data[0]["CPE Match"][0]["criteria"] }}</td>
+          <td>{{ data[0]["CPE Match"][0]["matchCriteriaId"] }}</td>
+          <td>{{ data[0]["CPE Match"][0]["vulnerable"] }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
 </html>
